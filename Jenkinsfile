@@ -1,13 +1,23 @@
-node('nodejs') {
+pipeline {
 	agent {
   	  node {
 	    label 'nodejs'
 	  }
 	}
+	stages {
+	stage('Run Tests') {
+	parallel {
 	stage('Backend Tests') {
-	sh 'node ./backend/test.js'
+		steps {
+		sh 'node ./backend/test.js'
+		}
 	}
 	stage('Frontend Tests') {
-	sh 'node ./frontend/test.js'
+		steps {
+		sh 'node ./frontend/test.js'
+		}
+	  }
 	}
+      }
+   }        
 }
