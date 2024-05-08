@@ -1,7 +1,8 @@
 node('nodejs') {
-	stage('Checkout') {
-  	  git branch: 'main',
-	  url: 'https://github.com/mattleka/do400-pipelines-control'
+	agent {
+  	  node {
+	    label 'nodejs'
+	  }
 	}
 	stage('Backend Tests') {
 	sh 'node ./backend/test.js'
